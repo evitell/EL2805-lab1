@@ -7,7 +7,12 @@ import matplotlib.pyplot as plt
 import time
 from IPython import display
 import random
-
+REWARDS = {
+    "STEP_REWARD" : 1,
+    "GOAL_REWARD" : 100000000,
+    "IMPOSSIBLE_REWARD": 100000000000000000000,
+    "MINOTAUR_REWARD": -1,
+}
 # Implemented methods
 methods = ['DynProg', 'ValIter']
 
@@ -37,10 +42,10 @@ class Maze:
     }
 
     # Reward values 
-    STEP_REWARD =           #TODO
-    GOAL_REWARD =           #TODO
-    IMPOSSIBLE_REWARD =     #TODO
-    MINOTAUR_REWARD =       #TODO
+    STEP_REWARD = REWARDS["STEP_REWARD"]          #TODO
+    GOAL_REWARD = REWARDS["GOAL_REWARD"]          #TODO
+    IMPOSSIBLE_REWARD = REWARDS["IMPOSSIBLE_REWARD"]    #TODO
+    MINOTAUR_REWARD = REWARDS["MINOTAUR_REWARD"]      #TODO
 
     def __init__(self, maze):
         """ Constructor of the environment Maze.
@@ -100,7 +105,13 @@ class Maze:
             col_player = self.states[state][0][1] + self.actions[action][1] # Column of the player's next position 
             
             # Is the player getting out of the limits of the maze or hitting a wall?
-            impossible_action_player =      #TODO
+
+            player_left = row_player < 0
+            player_right = row_player > self.maze.shape[0]
+            player_above = col_player < 0
+            player_below = col_player > self.maze.shape[1]
+            player_wall = self.maze[col_player, row_player] == 1
+            impossible_action_player =  player_left or player_right or player_above or player_below or player_wall
             
         
             actions_minotaur = [[0, -1], [0, 1], [-1, 0], [1, 0]] # Possible moves for the Minotaur
@@ -122,10 +133,10 @@ class Maze:
                 states = []
                 for i in range(len(rows_minotaur)):
                     
-                    if          :                          # TODO: We met the minotaur
+                    if  (self.states[state][0][0] == rows_minotaur[i]) and (self.states[state][0][1] == cols_minotaur[i])          :                          # TODO: We met the minotaur
                         states.append('Eaten')
                     
-                    elif        :                           # TODO: We are at the exit state, without meeting the minotaur
+                    elif self.maze[self.states[state][0][0], self.states[state][0][1]] ==2       :                           # TODO: We are at the exit state, without meeting the minotaur
                         states.append('Win')
                 
                     else:     # The player remains in place, the minotaur moves randomly
@@ -137,10 +148,10 @@ class Maze:
                 states = []
                 for i in range(len(rows_minotaur)):
                 
-                    if          :                          # TODO: We met the minotaur
+                    if   (row_player == rows_minotaur[i]) and (col_player == cols_minotaur[i])         :                          # TODO: We met the minotaur
                         states.append('Eaten')
                     
-                    elif        :                          # TODO:We are at the exit state, without meeting the minotaur
+                    elif self.maze[row_player,col_player] == 2       :                          # TODO:We are at the exit state, without meeting the minotaur
                         states.append('Win')
                     
                     else: # The player moves, the minotaur moves randomly
