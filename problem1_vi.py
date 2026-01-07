@@ -81,7 +81,7 @@ maze.animate_solution(mazex,path_vi)
 # %%
 wins = 0
 count = 0
-for i in range(1000):
+for i in range(10000):
     path_vi = env.simulate(start, policy_vi, 'ValIter')[0]
     count +=1
 
