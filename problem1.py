@@ -1,3 +1,6 @@
+# Name: Elias Vitell
+# Personal number: 0102057379
+
 # Copyright [2025] [KTH Royal Institute of Technology] 
 # Licensed under the Educational Community License, Version 2.0 (ECL-2.0)
 # This file is part of the Computer Lab 1 for EL2805 - Reinforcement Learning.
